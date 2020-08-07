@@ -17,24 +17,26 @@ AWS offers a vast array of compute services allowing clients to develop, deploy 
 as well as the ability to scale computing up or down based on the demand
 
 
-### Lightsail
+#### Lightsail
 - Automatically deploys and manages compute, storage and networking capabilities to run applications
 
-### Elastic Compute Cloud
+#### Elastic Compute Cloud
 - Virtual Machines in the cloud which you have 
 
-### Lambda
+#### Lambda
 - Serverless technology that allows you to run 
 
-### Elastic Beanstalk
+#### Elastic Beanstalk
+- Allows automated deployment and provisioning of resources like a highly scalable production website.
+
+
+### Storage Services
+- S3 (Simple Storage Service) — Storage service of AWS in which we can store objects like files, folders, images,
+documents, songs, etc. It cannot be used to install software, games or Operating System.
 
 
 
-## Storage Services
-
-
-
-### Entering our Instance 
+## Entering our Instance 
 
 1) We first download a file that contains the key which will let us enter our EC2 instance
 2) This key will most likely be found in our downloads folder, from git bash we run the following command to enter it

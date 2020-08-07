@@ -26,7 +26,7 @@ sudo npm install
 
 sudo npm install pm2 -g
 
-#pm2 alllows you to manage your application
+#pm2 allows you to manage your application
 
 pm2 start app.js
 
