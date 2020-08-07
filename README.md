@@ -5,7 +5,7 @@
 ## Prerequisites
 - Git Bash [Here](https://git-scm.com/downloads)
 
-As you can see here the prerequisites for this project are small here, this details the beauty of AWS and Cloud Computing.
+As you can see the prerequisites for this project are small here, this details the beauty of AWS and Cloud Computing.
 It minimises any need for local installations
 
 ## Creating an EC2 instance
@@ -15,6 +15,18 @@ It minimises any need for local installations
 ![Running An Instance](images/running-an-instance.png)
 
 
-## Entering Our Cloud Machine
+## Cloning The Repository
+- Download and extract the zip file and move it to a safe file location
 
-- Once you have received the IP address, we can enter the VM using the following command
+
+## Entering Our Cloud Machine and Running Our Application
+
+- The zip folder would have most likely gone to your downloads folder
+
+- Open git bash and locate to the folder where you have saved this cloned repository
+
+
+THe following command will run a provision script that would then run the application
+```commandline
+./setup.sh
+```
