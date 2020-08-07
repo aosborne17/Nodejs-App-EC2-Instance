@@ -3,6 +3,14 @@
 
 ## What is Node js
 
+- A runtime environment which contains everything necessary to execute a program written in JavaScript,
+this means js is not just excluded to run in browser but also on a machine as a stand alone application
+
+- This means developers can run scripts server side to produce dynamic web page content before
+the page is sent to the user's web browser
+
+- The engine that node.js runs on converts JS code into faster machine code
+
 
 
 ## What is AWS
