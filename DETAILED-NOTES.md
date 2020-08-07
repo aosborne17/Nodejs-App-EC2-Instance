@@ -135,3 +135,4 @@ Stands for Secure Copy, this command transfers files
 ssh -i ~/.ssh/DevOpsStudents\ \(2\).pem ubuntu@52.214.19.30
 ```
 This will allow us to enter our VM, similar to vagrant ssh
+
