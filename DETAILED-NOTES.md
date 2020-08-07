@@ -136,3 +136,9 @@ ssh -i ~/.ssh/DevOpsStudents\ \(2\).pem ubuntu@52.214.19.30
 ```
 This will allow us to enter our VM, similar to vagrant ssh
 
+
+
+### Running the Node js application with a Reverse Proxy            
+
+
+### Creating a Second EC2 instance to connect to Mongo DB database
