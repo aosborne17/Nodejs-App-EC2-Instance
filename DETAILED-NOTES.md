@@ -160,3 +160,15 @@ This error is most likely due to my dump file, which was explained below
 
 We will have to run pm2 save --force
 and get the response ``` Successfully saved in /home/ubuntu/.pm2/dump.pm2 ```
+
+
+Got an error where I tried to run my provision.sh file in my VM:
+
+```commandline
+Bash script and /bin/bash^M: bad interpreter: No such file or directory [duplicate]
+
+```
+It was overcome by running this command
+```
+sed -i -e 's/\r$//' scriptname.sh
+```
