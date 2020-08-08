@@ -142,3 +142,21 @@ This will allow us to enter our VM, similar to vagrant ssh
 
 
 ### Creating a Second EC2 instance to connect to Mongo DB database
+
+### Connecting EC2 instance to mongoDB server
+
+port 22 is our SSH port, when we run SSH vagrantr, it is communicating to that machine on port 22
+port 80 is the standard for web servers
+port 27017 is where mongoDB communicates
+
+When I tried to rerun the application the next day (thus the VM had a different IP) I received this error
+
+![PM2 Error](images/pm2-error.png)
+...
+
+This error is most likely due to my dump file, which was explained below
+
+![Dump File Error](images/dump-file-error.png)
+
+We will have to run pm2 save --force
+and get the response ``` Successfully saved in /home/ubuntu/.pm2/dump.pm2 ```
