@@ -143,8 +143,11 @@ to the db
 
 ![App-to-DB](images/Adding-App-security-group-to-IP.png)
 
+Note that every time we restart our App instance, we would need to change the Ip of the inbound VM, in order to connect
+successfully
 
-sudo npm install
+
+
 
 
 ### Errors
@@ -192,6 +195,13 @@ cd /etc
 nano mongod.conf # in here we add what should be added to my mongod.conf file
 ```
 
+
+The reason this wasn't working is because i had only synced by provision file from my db folder instead of syncing the
+whole db folder, this meant that when I ran the db provision file, it couldn't find the mongod.config file for which to
+sync with, therefore it wasn't rendering 
+
+Overcame this by syncing my whole db folder into the vm rather than just my provision file
+
 Now I must restart mongod for these changes to take place
 Restart will look at the mongod.conf file and will run based on the what is inside that file
 ```commandline
@@ -203,7 +213,16 @@ Now we will recheck the mongod status to see if it is running
 systemctl status mongod
 ```
 
-Note that sometimes when I run my provision.sh file, some commands don't erun, e.g. my env variables aren't set
+Note that sometimes when I run my provision.sh file, some commands don't run, e.g. my env variables aren't set,
+make sure to run this in our app instance
 ```commandline
-
+export DB_HOST="mongodb://34.245.144.104:27017/posts"
 ```
+
+
+Once inside an instance we can reboot the machine by running the following command:
+```commandline
+reboot
+```
+
+Reboots the whole machine

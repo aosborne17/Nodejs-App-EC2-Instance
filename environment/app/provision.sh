@@ -39,7 +39,7 @@ sudo apt-get install npm -y
 # Because our DB is running on a different VM, we would connect to the IP of where the DB is placed
 # we must also make sure the firewall allows inbound connection from the ap vm, to be able to interact and grab the data
 
-export DB_HOST="mongodb://34.245.144.104:27017/posts"
+export DB_HOST="mongodb://54.247.9.4:27017/posts"
 
 # DB is running on same machine as the app, the IP of the DB would be the local host
 # export DB_HOST="mongodb://127.0.0.1:27017/posts"
