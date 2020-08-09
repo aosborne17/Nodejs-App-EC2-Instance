@@ -70,28 +70,17 @@ cd ~/.ssh
 
 5) Now we can run the ssh command which will allow us to enter our EC2 virtual machine
 ```commandline
-ssh -i ~/.ssh/DevOpsStudents\ \(2\).pem ubuntu@52.214.19.30
+ssh -i ~/.ssh/DevOpsStudents\ \(2\).pem ubuntu@ip-of-vm
 ```
 At the end we have added the name of ubuntu OS and our IP address to enter our VM
 
 
-### Manually Provision An EC2 instance
-
-- create provision.sh script
-
-sudo apt-get nginx 
-sudo apt-get install npm
-sudo apt-get install nodejs
-
-- install app prerequisites
-npm, nginx, nodejs, npm packages, run server
-
-sudo apt-get update --> Run this command before we begin to install programs
-
-npm packages are the dependenices for node js
 
 ### Creating A provision.sh file to automate the process
-This provision file will contain
+
+- We want to create provision.sh file into our VM so that every time we enter our VM, it can set up the exact same environment
+and download all the dependencies we would need to run our app
+
 
 ```commandline
 #!/bin/bash
@@ -149,6 +138,17 @@ port 22 is our SSH port, when we run SSH vagrantr, it is communicating to that m
 port 80 is the standard for web servers
 port 27017 is where mongoDB communicates
 
+In order for our app to get data from our DB, we need to add app to the inbound rules of the db, so the db allows access
+to the db
+
+![App-to-DB](images/Adding-App-security-group-to-IP.png)
+
+
+sudo npm install
+
+
+### Errors
+
 When I tried to rerun the application the next day (thus the VM had a different IP) I received this error
 
 ![PM2 Error](images/pm2-error.png)
@@ -182,4 +182,28 @@ E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is an
 used the below code to correct it
 ```commandline
 sudo dpkg --configure -a
+```
+
+
+mongod.conf file not syncing when my db/provision.sh file runs, therefore I manually go into the file by
+```commandline
+cd # cd to the root 
+cd /etc
+nano mongod.conf # in here we add what should be added to my mongod.conf file
+```
+
+Now I must restart mongod for these changes to take place
+Restart will look at the mongod.conf file and will run based on the what is inside that file
+```commandline
+systemctl restart mongod
+```
+
+Now we will recheck the mongod status to see if it is running
+```commandline
+systemctl status mongod
+```
+
+Note that sometimes when I run my provision.sh file, some commands don't erun, e.g. my env variables aren't set
+```commandline
+
 ```

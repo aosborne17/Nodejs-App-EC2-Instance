@@ -34,9 +34,15 @@ sudo apt-get install nodejs -y
 sudo apt-get install npm -y
 
 
-# App set up, setting it to local host and to the mongo db port
+# App set up, setting it to my DB ip and to the mongo db port
 
-export DB_HOST="mongodb://127.0.0.1:27017/posts"
+# Because our DB is running on a different VM, we would connect to the IP of where the DB is placed
+# we must also make sure the firewall allows inbound connection from the ap vm, to be able to interact and grab the data
+
+export DB_HOST="mongodb://34.245.144.104:27017/posts"
+
+# DB is running on same machine as the app, the IP of the DB would be the local host
+# export DB_HOST="mongodb://127.0.0.1:27017/posts"
 
 # We need to go into our app folder before we run sudo npm install, this is because this is where our package.json file is found
 # this allows npm to install the dependencies
