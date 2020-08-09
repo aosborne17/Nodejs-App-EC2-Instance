@@ -6,6 +6,8 @@ sudo apt-get update -y
 # upgrade any packages available
 sudo apt-get upgrade -y
 
+sudo apt-get upgrade -y
+
 # install nginx
 sudo apt-get install nginx -y
 
@@ -24,13 +26,35 @@ echo "server{
 sudo ln -s /etc/nginx/sites-available/reverse-proxy.conf /etc/nginx/sites-enabled/reverse-proxy.conf
 sudo service nginx restart
 
-# install git
-sudo apt-get install git -y
 
-# install nodejs
-sudo apt-get install python-software-properties
+# installing node and npm
+
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install nodejs -y
+sudo apt-get install npm -y
 
-# install pm2
+
+# App set up, setting it to local host and to the mongo db port
+
+export DB_HOST="mongodb://127.0.0.1:27017/posts"
+
+# We need to go into our app folder before we run sudo npm install, this is because this is where our package.json file is found
+# this allows npm to install the dependencies
+cd /home/ubuntu/app
+
+#Looks for the package.json file and uses that to install all the dependencies necessary
+# the node equivalent of pip install requirements.txt
+sudo npm install
+
+# Install pm2
 sudo npm install pm2 -g
+
+
+
+
+
+
+# Pm2 manages the application
+# pm2 stop app.js
+  pm2 stop all # works anywhere and not just in the folder
+  pm2 start app.js -f

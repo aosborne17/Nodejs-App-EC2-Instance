@@ -172,3 +172,14 @@ It was overcome by running this command
 ```
 sed -i -e 's/\r$//' scriptname.sh
 ```
+
+Got an error when trying to manually install mongoDB
+
+```commandline
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?
+```
+
+used the below code to correct it
+```commandline
+sudo dpkg --configure -a
+```
