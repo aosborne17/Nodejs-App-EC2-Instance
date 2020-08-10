@@ -147,6 +147,9 @@ Note that every time we restart our App instance, we would need to change the Ip
 successfully
 
 
+npm test, shows what web pages are working and
+
+
 
 
 
@@ -205,7 +208,7 @@ Overcame this by syncing my whole db folder into the vm rather than just my prov
 Now I must restart mongod for these changes to take place
 Restart will look at the mongod.conf file and will run based on the what is inside that file
 ```commandline
-systemctl restart mongod
+systemctl restart mongod****
 ```
 
 Now we will recheck the mongod status to see if it is running
