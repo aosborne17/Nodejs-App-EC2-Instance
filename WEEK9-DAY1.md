@@ -38,3 +38,38 @@ Mocha is the module running the tests, the below command makes sure after we tes
 In addition we must commenting out the psots function in order for our tests to pass succesfully
 
 ![](images/commenting-out-test.png)
+
+
+
+Our build to may fail due to their being another app listed on port 3000, this can be overcome by running ``` sudo killall node ```
+into the execute shell as seen below
+
+![](images/jenkins-killall-node.png)
+
+
+
+### removing the remote
+
+We want to remove the remote and add our own remote, thus we can point it to our own repository
+```commandline
+git remote rm origin
+```
+
+Now when we run ```git remote --v```, there shouldn't be any remote's
+
+We will now make a repo from which we will have this folder point to, after we have created the repo we run the following
+command
+```commandline
+git@github.com:aosborne17/Node-App-Pipeline.git
+```
+
+or for http we could run
+```commandline
+git remote set-url origin https://github.com/aosborne17/Node-App-Pipeline.git
+```
+
+We can now push to github
+```commandline
+git push -u orgin master
+```
+
