@@ -70,28 +70,17 @@ cd ~/.ssh
 
 5) Now we can run the ssh command which will allow us to enter our EC2 virtual machine
 ```commandline
-ssh -i ~/.ssh/DevOpsStudents\ \(2\).pem ubuntu@52.214.19.30
+ssh -i ~/.ssh/DevOpsStudents\ \(2\).pem ubuntu@ip-of-vm
 ```
 At the end we have added the name of ubuntu OS and our IP address to enter our VM
 
 
-### Manually Provision An EC2 instance
-
-- create provision.sh script
-
-sudo apt-get nginx 
-sudo apt-get install npm
-sudo apt-get install nodejs
-
-- install app prerequisites
-npm, nginx, nodejs, npm packages, run server
-
-sudo apt-get update --> Run this command before we begin to install programs
-
-npm packages are the dependenices for node js
 
 ### Creating A provision.sh file to automate the process
-This provision file will contain
+
+- We want to create provision.sh file into our VM so that every time we enter our VM, it can set up the exact same environment
+and download all the dependencies we would need to run our app
+
 
 ```commandline
 #!/bin/bash
@@ -136,3 +125,107 @@ ssh -i ~/.ssh/DevOpsStudents\ \(2\).pem ubuntu@52.214.19.30
 ```
 This will allow us to enter our VM, similar to vagrant ssh
 
+
+
+### Running the Node js application with a Reverse Proxy            
+
+
+### Creating a Second EC2 instance to connect to Mongo DB database
+
+### Connecting EC2 instance to mongoDB server
+
+port 22 is our SSH port, when we run SSH vagrantr, it is communicating to that machine on port 22
+port 80 is the standard for web servers
+port 27017 is where mongoDB communicates
+
+In order for our app to get data from our DB, we need to add app to the inbound rules of the db, so the db allows access
+to the db
+
+![App-to-DB](images/Adding-App-security-group-to-IP.png)
+
+Note that every time we restart our App instance, we would need to change the Ip of the inbound VM, in order to connect
+successfully
+
+
+npm test, shows what web pages are working and
+
+
+
+
+
+### Errors
+
+When I tried to rerun the application the next day (thus the VM had a different IP) I received this error
+
+![PM2 Error](images/pm2-error.png)
+...
+
+This error is most likely due to my dump file, which was explained below
+
+![Dump File Error](images/dump-file-error.png)
+
+We will have to run pm2 save --force
+and get the response ``` Successfully saved in /home/ubuntu/.pm2/dump.pm2 ```
+
+
+Got an error where I tried to run my provision.sh file in my VM:
+
+```commandline
+Bash script and /bin/bash^M: bad interpreter: No such file or directory [duplicate]
+
+```
+It was overcome by running this command
+```
+sed -i -e 's/\r$//' scriptname.sh
+```
+
+Got an error when trying to manually install mongoDB
+
+```commandline
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?
+```
+
+used the below code to correct it
+```commandline
+sudo dpkg --configure -a
+```
+
+
+mongod.conf file not syncing when my db/provision.sh file runs, therefore I manually go into the file by
+```commandline
+cd # cd to the root 
+cd /etc
+nano mongod.conf # in here we add what should be added to my mongod.conf file
+```
+
+
+The reason this wasn't working is because i had only synced by provision file from my db folder instead of syncing the
+whole db folder, this meant that when I ran the db provision file, it couldn't find the mongod.config file for which to
+sync with, therefore it wasn't rendering 
+
+Overcame this by syncing my whole db folder into the vm rather than just my provision file
+
+Now I must restart mongod for these changes to take place
+Restart will look at the mongod.conf file and will run based on the what is inside that file
+```commandline
+systemctl restart mongod****
+```
+
+Now we will recheck the mongod status to see if it is running
+```commandline
+systemctl status mongod
+```
+
+Note that sometimes when I run my provision.sh file, some commands don't run, e.g. my env variables aren't set,
+make sure to run this in our app instance
+```commandline
+export DB_HOST="mongodb://34.245.144.104:27017/posts"
+```
+
+
+Once inside an instance we can reboot the machine by running the following command:
+```commandline
+reboot
+```
+
+Reboots the whole machine
