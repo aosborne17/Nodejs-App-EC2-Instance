@@ -70,4 +70,45 @@ git remote set-url origin https://github.com/aosborne17/Node-App-Pipeline.git
 
 We can now push to github
 ```commandline
+
 git push -u orgin master
+```
+
+### How we entered our instances
+
+- copied app folder
+- copied env folder
+- ssh into machine
+
+
+### Continuous Delivery With Jenkins
+
+- We need to open port 22 for jenkins
+
+
+Inside the execute shell we add the following commands to 
+
+```commandline
+# '-r' stands for recursive, this tells scp to recursively copy the source directory and its contents
+scp -o "StrictHostKeyChecking=no" -r app ubuntu@54.247.55.44:/home/ubuntu
+scp -o "StrictHostKeyChecking=no" -r environment ubuntu@54.247.55.44:/home/ubuntu
+ssh -o "StrictHostKeyChecking=no" ubuntu@54.247.55.44 <<EOF	
+    sudo bash ./environment/app/provision.sh
+    cd app
+    pm2 kill
+    pm2 start app.js
+    
+EOF
+```
+
+After this must then add a ssh port 22 connection, we are using 0,0,0,0 because this means we are allowing everyone in,
+including the jenkins folder that we are working with
+
+![](images/adding-port22-inbound.png)
+
+
+
+For this configuration the '*' works as a placeholder, this means that as long as the branch starts with 'dev' then it
+will listen to these branches
+
+![](images/placeholder-for-branches.png)
