@@ -33,3 +33,8 @@ The DevOpdStudents ssh key exists in jenkins and in AWS
 Mocha is the module running the tests, the below command makes sure after we test we exit
 
 ![](images/mocha-exit.png)
+
+
+In addition we must commenting out the psots function in order for our tests to pass succesfully
+
+![](images/commenting-out-test.png)
