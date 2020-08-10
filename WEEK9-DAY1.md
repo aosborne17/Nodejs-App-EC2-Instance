@@ -40,9 +40,10 @@ In addition we must commenting out the psots function in order for our tests to 
 ![](images/commenting-out-test.png)
 
 
+ur build to may fail due to their being another app listed on port 3000, this can be overcome by running sudo killall node 
+into the execute shell as seen below
 
-
-
+![](images/jenkins-killall-node.png)
 
 
 
