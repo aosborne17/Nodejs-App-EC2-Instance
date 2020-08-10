@@ -229,3 +229,6 @@ reboot
 ```
 
 Reboots the whole machine
+
+
+Making development changes
